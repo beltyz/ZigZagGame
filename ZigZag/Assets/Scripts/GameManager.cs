@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +11,21 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool isGameStarted;
     public GameObject platformSpawner;
+
+    [Header("Score")]
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI bestText;
+    public TextMeshProUGUI DiamondText;
+    public TextMeshProUGUI startText;
+
+    [Header("GameOver")]
+    [SerializeField] GameObject GameOverPanel;
+    [SerializeField] TextMeshProUGUI lastScoreText;
+
+
+    int score = 0;
+    int bestScore, totalDiamond, totalStar;
+    bool countScore;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -18,7 +36,16 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        //totalDiamond
+        totalDiamond = PlayerPrefs.GetInt("totalDiamond");
+        DiamondText.text= totalDiamond.ToString();
+        //totalStar
+        totalStar = PlayerPrefs.GetInt("totalStar");
+        startText.text= totalStar.ToString();
+
+        //bestScore
+        bestScore = PlayerPrefs.GetInt("bestScore");
+        bestText.text = bestScore.ToString();
     }
 
     // Update is called once per frame
@@ -35,13 +62,42 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
+
+        countScore = true;
         isGameStarted = true;
+        StartCoroutine(UpdateScore());
         platformSpawner.SetActive(true);
     }
 
     public void GameOver()
     {
+        GameOverPanel.SetActive(true);
+        lastScoreText.text = score.ToString();
+        countScore = false;
         isGameStarted = false;
         platformSpawner.SetActive(false);
+        if (score>bestScore)
+        {
+            PlayerPrefs.SetInt("bestScore", score);
+        }
+    }
+    IEnumerator UpdateScore()
+    {
+        while(countScore)
+        {
+            yield return new WaitForSeconds(1f);
+            score++;
+            if (score>bestScore)
+            {
+                bestText.text = score.ToString();
+            }
+            
+            scoreText.text = score.ToString();
+        }
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }

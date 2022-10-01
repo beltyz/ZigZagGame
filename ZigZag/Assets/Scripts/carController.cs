@@ -23,8 +23,10 @@ public class carController : MonoBehaviour
             //Rotate();
             CheckInput();
         }
-        if (transform.position.y<=0.4f)
+
+        if (transform.position.y<=-2f)
         {
+
             GameManager.instance.GameOver();
         }
         
