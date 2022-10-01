@@ -7,10 +7,18 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform target;
     Vector3 distance;
     [SerializeField] float followSpeed;
+
+    [SerializeField]
+    [Range(0f, 1f)] float lerpTime;
+    [SerializeField] Color[] myColors;
+    int colorIndex=0;
+    float change = 0f;
+    int len;
     // Start is called before the first frame update
     void Start()
     {
         distance = target.position - transform.position;
+        len=myColors.Length;
     }
 
     // Update is called once per frame
@@ -20,6 +28,8 @@ public class CameraController : MonoBehaviour
         {
             Follow();
         }
+        Camera.main.backgroundColor = Color.Lerp(Camera.main.backgroundColor, myColors[colorIndex], lerpTime*Time.deltaTime);
+        change = Mathf.Lerp(change, 1f, lerpTime * Time.deltaTime);
        
     }
 

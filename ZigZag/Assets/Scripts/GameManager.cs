@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool isGameStarted;
     public GameObject platformSpawner;
 
+
     [Header("Score")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI bestText;
@@ -24,7 +25,8 @@ public class GameManager : MonoBehaviour
 
 
     int score = 0;
-    int bestScore, totalDiamond, totalStar;
+
+   private int bestScore, totalDiamond, totalStar;
     bool countScore;
     // Start is called before the first frame update
     private void Awake()
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         //totalDiamond
         totalDiamond = PlayerPrefs.GetInt("totalDiamond");
+       
         DiamondText.text= totalDiamond.ToString();
         //totalStar
         totalStar = PlayerPrefs.GetInt("totalStar");
@@ -60,9 +63,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public void GameStart()
     {
-
+        Time.timeScale = 1f ;
         countScore = true;
         isGameStarted = true;
         StartCoroutine(UpdateScore());
@@ -71,7 +75,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        StartCoroutine(WaitBeforeGameOver());
+       
         GameOverPanel.SetActive(true);
+        
         lastScoreText.text = score.ToString();
         countScore = false;
         isGameStarted = false;
@@ -99,5 +106,24 @@ public class GameManager : MonoBehaviour
     public void Replay()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+    public void GetStar()
+    {
+        totalStar++;
+        PlayerPrefs.SetInt("totalStar", totalStar);
+        startText.text = totalStar.ToString();
+    }
+    public void GetDiamond()
+    {
+       totalDiamond++;
+        PlayerPrefs.SetInt("totalDiamond", totalDiamond);
+        DiamondText.text = totalDiamond.ToString();
+    }
+    IEnumerator WaitBeforeGameOver()
+    {
+
+        yield return new WaitForSeconds(0.8f);
+        Time.timeScale = 0f;
+
     }
 }

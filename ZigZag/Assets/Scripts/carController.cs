@@ -20,7 +20,6 @@ public class carController : MonoBehaviour
         {
             
             transform.position += transform.forward*moveSpeed*Time.deltaTime;
-            //Rotate();
             CheckInput();
         }
 
