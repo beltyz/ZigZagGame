@@ -6,7 +6,6 @@ public class Platform : MonoBehaviour
 {
     public GameObject particlePlatform;
     [SerializeField] GameObject diamond;
-    [SerializeField] GameObject star;
 
     // Start is called before the first frame update
     void Start()
@@ -14,12 +13,7 @@ public class Platform : MonoBehaviour
         
         int randNum = Random.Range(1,60);
         Vector3 tempPos = transform.position;
-        tempPos.y += 1f;
-        if (randNum<4)
-        {
-            Instantiate(star, tempPos,star.transform.rotation);
-
-        }
+        tempPos.y += 0.5f;
         if (randNum==7)
         {
             Instantiate(diamond, tempPos, diamond.transform.rotation);

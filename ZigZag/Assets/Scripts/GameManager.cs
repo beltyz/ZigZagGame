@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI bestText;
     public TextMeshProUGUI DiamondText;
-    public TextMeshProUGUI startText;
+   // public TextMeshProUGUI startText;
 
     [Header("GameOver")]
     [SerializeField] GameObject GameOverPanel;
@@ -43,8 +43,6 @@ public class GameManager : MonoBehaviour
        
         DiamondText.text= totalDiamond.ToString();
         //totalStar
-        totalStar = PlayerPrefs.GetInt("totalStar");
-        startText.text= totalStar.ToString();
 
         //bestScore
         bestScore = PlayerPrefs.GetInt("bestScore");
@@ -61,6 +59,10 @@ public class GameManager : MonoBehaviour
                 GameStart();
             }
         }
+    }
+    public void Home()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
@@ -92,7 +94,7 @@ public class GameManager : MonoBehaviour
     {
         while(countScore)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1);
             score++;
             if (score>bestScore)
             {
@@ -103,20 +105,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public void Replay()
     {
         SceneManager.LoadScene("SampleScene");
     }
-    public void GetStar()
-    {
-        totalStar++;
-        PlayerPrefs.SetInt("totalStar", totalStar);
-        startText.text = totalStar.ToString();
-    }
+
     public void GetDiamond()
     {
-       totalDiamond++;
-        PlayerPrefs.SetInt("totalDiamond", totalDiamond);
+         totalDiamond++;
+        PlayerPrefs.SetInt("Diamond", totalDiamond);
         DiamondText.text = totalDiamond.ToString();
     }
     IEnumerator WaitBeforeGameOver()
