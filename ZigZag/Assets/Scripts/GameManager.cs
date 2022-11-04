@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool isGameStarted;
     public GameObject platformSpawner;
+    public GameObject but;
 
 
     [Header("Score")]
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        but.SetActive(true);
         //totalDiamond
         totalDiamond = PlayerPrefs.GetInt("totalDiamond");
        
@@ -48,17 +50,10 @@ public class GameManager : MonoBehaviour
         bestScore = PlayerPrefs.GetInt("bestScore");
         bestText.text = bestScore.ToString();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void ButtonDown()
     {
-        if (!isGameStarted)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                GameStart();
-            }
-        }
+        but.SetActive(false);
+        GameStart();
     }
     public void Home()
     {

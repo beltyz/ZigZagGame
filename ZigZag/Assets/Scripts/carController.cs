@@ -16,13 +16,12 @@ public class carController : MonoBehaviour
     }
     void Update()
     {
+
         if (GameManager.instance.isGameStarted)
         {
-            
-            transform.position += transform.forward*moveSpeed*Time.deltaTime;
-            CheckInput();
-        }
 
+            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        }
         if (transform.position.y<=-2f)
         {
 
@@ -30,34 +29,10 @@ public class carController : MonoBehaviour
         }
         
     }
-
-    private void Rotate()
-    {
-        Vector3 rot = player.transform.rotation.eulerAngles;
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            if (rot.y == 0f)
-            {
-                rot.y = 90f;
-                player.transform.rotation = Quaternion.Euler(rot);
-                return;
-            }
-            if (rot.y == 90f)
-            {
-                rot.y = 0f;
-                player.transform.rotation = Quaternion.Euler(rot);
-                return;
-            }
-
-        }
-    }
-    void CheckInput()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            ChangeDir();
-        }
-    }
+  public  void CheckInpu()
+  {
+        ChangeDir();
+  }
 
     void ChangeDir()
     {
