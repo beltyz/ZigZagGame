@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: df610840cc10d2b4d8527d34d23ca1c9, type: 2}
+  - {fileID: 2100000, guid: 4dae68f564001bf4f8a540fbbf107450, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,4 +127,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particlePlatform: {fileID: 4307612311957526720, guid: c90b39bd23335084f9602e833670a86f, type: 3}
   diamond: {fileID: 5121253058472716062, guid: 6d91f56312247c4408bf09082aa7c4de, type: 3}
-  star: {fileID: 9050474969699019145, guid: d3f94af768daef64a9228a880db9ea6d, type: 3}
